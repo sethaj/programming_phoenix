@@ -1,3 +1,4 @@
+/*
 // NOTE: The contents of this file will only be executed if
 // you uncomment its entry in "web/static/js/app.js".
 
@@ -59,4 +60,13 @@ channel.join()
   .receive("ok", resp => { console.log("Joined successfully", resp) })
   .receive("error", resp => { console.log("Unable to join", resp) })
 
+export default socket
+*/
+
+import {Socket} from "phoenix"
+
+let socket = new Socket("/socket", {
+  params: {token: window.userToken},
+  logger: (kind, msg, data) => { console.log(`${kind}: ${msg}`, data) }
+})
 export default socket
