@@ -2,7 +2,7 @@ import Player from "./player"
 
 let Video = {
 
-  init(socket, element) { 
+  init(socket, element) {
     if(!element) { return }
     let playerId = element.getAttribute("data-player-id")
     let videoId  = element.getAttribute("data-id")
@@ -31,9 +31,10 @@ let Video = {
     })
 
     vidChannel.join()
-      .receive("ok", resp => console.log("joined the video channel", resp) )
+      .receive("ok", ({annotations}) => {
+        annotations.forEach( ann => this.renderAnnotation(msgContainer, ann) )
+      })
       .receive("error", reason => console.log("join failed", reason) )
-
   },
 
   esc(str) {
