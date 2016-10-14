@@ -2,7 +2,8 @@ import Player from "./player"
 
 let Video = {
 
-  init(socket, element) { if(!element) { return }
+  init(socket, element) { 
+    if(!element) { return }
     let playerId = element.getAttribute("data-player-id")
     let videoId  = element.getAttribute("data-id")
     socket.connect()
@@ -44,9 +45,11 @@ let Video = {
   renderAnnotation(msgContainer, {user, body, at}) {
     let template = document.createElement("div")
 
-    template.innerHTML =  '<a href="#" data-seek="${this.esc(at)}">'
-    template.innerHTML .=   '<b>${this.esc(user.username)}</b>'
-    template.innerHTML .= ': ${this.esc(body)}</a>'
+    template.innerHTML = `
+    <a href="#" data-seek="${this.esc(at)}">
+      <b>${this.esc(user.username)}</b>: ${this.esc(body)}
+    </a>
+    `
     msgContainer.appendChild(template)
     msgContainer.scrollTop = msgContainer.scrollHeight
   }
